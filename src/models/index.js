@@ -59,6 +59,18 @@ const Boletos = sequelize.define('boletos', {
   },
 });
 
+const LotesConsult = sequelize.define('lotesConsults', {
+  nome_lote: {
+    type: Sequelize.STRING(100),
+    allowNull: true,
+    primaryKey: true
+  },
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+});
+
 Lotes.hasMany(Boletos, { foreignKey: 'id_lote' });
 Boletos.belongsTo(Lotes, { foreignKey: 'id_lote' });
 
@@ -73,4 +85,5 @@ sequelize.sync()
 module.exports = {
   Lotes,
   Boletos,
+  LotesConsult,
 };
