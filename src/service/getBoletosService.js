@@ -47,7 +47,9 @@ async function gerarRelatorioPDF() {
 
         const columnWidths = [60, 150, 60, 80, 150];
 
-        generateTable(doc, table, columnWidths);
+        const columnBody = [10, 25, 10, 15, 20];
+
+        generateTable(doc, table, columnWidths, columnBody);
 
         const chunks = [];
         doc.on("data", (chunk) => chunks.push(chunk));
@@ -64,12 +66,12 @@ async function gerarRelatorioPDF() {
   });
 }
 
-function generateTable(doc, table, columnWidths) {
+function generateTable(doc, table, columnWidths, columnBody) {
   const { headers, rows } = table;
 
   doc.font("Helvetica-Bold").fontSize(12);
 
-  const headerRow = headers.join(" | ");
+  const headerRow = headers.join("   |   ");
   doc.text(headerRow, {
     width: columnWidths.reduce((a, b) => a + b),
     align: "center",
@@ -85,10 +87,10 @@ function generateTable(doc, table, columnWidths) {
 
   for (const row of rows) {
     const formattedRow = row.map((item, index) => {
-      const width = columnWidths[index] - 5;
+      const width = columnBody[index] - 5;
       return item.toString().padEnd(width);
     });
-    doc.text(formattedRow.join(" | "), {
+    doc.text(formattedRow.join("|      "), {
       width: columnWidths.reduce((a, b) => a + b),
       align: "center",
     });

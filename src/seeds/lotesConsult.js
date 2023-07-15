@@ -5,7 +5,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
   storage: './database.sqlite',
 });
 
-const LotesConsult = sequelize.define('lotesConsult', {
+const LotesConsult = sequelize.define('lotes_consults', {
   nome_lote: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -35,4 +35,4 @@ async function seed() {
   }
 }
 
-seed();
+module.exports= { seed };

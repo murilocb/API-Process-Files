@@ -18,12 +18,18 @@ async function processCSV(filePath) {
               where: { nome_lote: '00' + unidade },
             });
 
-            await Lotes.findOrCreate({
+            const lotes = await Lotes.findOne({
               where: { id: lotesConsultRecord.id },
-              nome,
-              ativo: true,
-              criado_em: new Date(),
-            });
+            })
+
+            if (!lotes) {
+              await Lotes.create({
+                id: lotesConsultRecord.id,
+                nome,
+                ativo: true,
+                criado_em: new Date(),
+              });
+            }
 
             if (!lotesConsultRecord) {
               console.error(

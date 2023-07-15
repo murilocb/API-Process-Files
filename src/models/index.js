@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../database/db');
+const Sequelize = require("sequelize");
+const sequelize = require("../database/db");
 
-const Lotes = sequelize.define('lotes', {
+const Lotes = sequelize.define("lotes", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -16,13 +16,9 @@ const Lotes = sequelize.define('lotes', {
     type: Sequelize.BOOLEAN,
     allowNull: true,
   },
-  criado_em: {
-    type: Sequelize.DATE,
-    allowNull: true,
-  },
 });
 
-const Boletos = sequelize.define('boletos', {
+const Boletos = sequelize.define("boletos", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -38,7 +34,7 @@ const Boletos = sequelize.define('boletos', {
     allowNull: false,
     references: {
       model: Lotes,
-      key: 'id',
+      key: "id",
     },
   },
   valor: {
@@ -53,17 +49,13 @@ const Boletos = sequelize.define('boletos', {
     type: Sequelize.BOOLEAN,
     allowNull: true,
   },
-  criado_em: {
-    type: Sequelize.DATE,
-    allowNull: true,
-  },
 });
 
-const LotesConsult = sequelize.define('lotesConsults', {
+const LotesConsult = sequelize.define("lotes_consults", {
   nome_lote: {
     type: Sequelize.STRING(100),
     allowNull: true,
-    primaryKey: true
+    primaryKey: true,
   },
   id: {
     type: Sequelize.INTEGER,
@@ -71,15 +63,16 @@ const LotesConsult = sequelize.define('lotesConsults', {
   },
 });
 
-Lotes.hasMany(Boletos, { foreignKey: 'id_lote' });
-Boletos.belongsTo(Lotes, { foreignKey: 'id_lote' });
+Lotes.hasMany(Boletos, { foreignKey: "id_lote" });
+Boletos.belongsTo(Lotes, { foreignKey: "id_lote" });
 
-sequelize.sync()
+sequelize
+  .sync()
   .then(() => {
-    console.log('Tables created successfully.');
+    console.log("Tables created successfully.");
   })
   .catch((error) => {
-    console.error('Unable to create tables:', error);
+    console.error("Unable to create tables:", error);
   });
 
 module.exports = {
