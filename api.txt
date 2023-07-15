@@ -1,1 +1,3 @@
 curl -X POST -F "file=@boleto.csv" http://localhost:3000/boleto
+
+curl -X POST -F "file=@boletosPages.pdf" http://localhost:3000/pdf
