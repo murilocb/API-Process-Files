@@ -1,9 +1,12 @@
+#Envia o Boleto para rota atividade 1 e 2
 curl -X POST -F "file=@boleto.csv" http://localhost:3000/boleto
 
+#Separa os boletos recebidos em pdf por pagina atividade 3
 curl -X POST -F "file=@boletosPages.pdf" http://localhost:3000/pdf
 
+#Atividade 4 pegar os dados do banco e querys opicionais
+curl --request GET \  --url http://localhost:3000/boletos
 curl --request GET \  --url 'http://localhost:3000/boletos?nome=JOSE&valor_inicial=100&valor_final=200&id_lote=3'
 
-curl --request GET \  --url http://localhost:3000/boletos
-
+#Atividade 5 gerar um relatório em pdf
 curl --request GET \  --url 'http://localhost:3000/boletos?relatorio=1'
