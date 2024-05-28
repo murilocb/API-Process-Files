@@ -1,5 +1,3 @@
-# test-green-acesso
-
 # Iniciar o projeto
 
 Para instalar as depencencias utilize `npm install`.
